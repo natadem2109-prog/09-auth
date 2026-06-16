@@ -13,11 +13,6 @@ interface FetchNotesResponse {
   totalPages: number;
 }
 
-interface NoteListResponse {
-  notes: Note[];
-  totalPages: number;
-}
-
 export const fetchNotes = async (
   page: number,
   search: string,
@@ -48,14 +43,6 @@ export const deleteNote = async (id: string) => {
 export const createNote = async (note: CreateNoteData) => {
   const { data } = await nextServer.post<Note>("/notes", note);
   return data;
-};
-
-export const getNotes = async (categoryId?: string) => {
-  const res = await nextServer.get<NoteListResponse>("/notes", {
-    params: { categoryId },
-  });
-
-  return res.data;
 };
 
 export type RegisterRequest = {
